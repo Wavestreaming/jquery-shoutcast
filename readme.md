@@ -138,3 +138,40 @@ Each call to $.SHOUTcast will return an internal SHOUTcast object, this object h
 * `getStatus()` - get the status of the stream, the return values are: 0 = offline, 1 = no source connected, 2 = on air
 * `onAir()` - check if the stream is on air will return true or false
 
+
+## SHOUTcast info
+
+### Stats
+
+These are the various options which can be accessed when using the stats method.
+
+* currentlisteners
+* peaklisteners
+* maxlisteners
+* uniquelisteners
+* averagetime
+* servergenre
+* serverurl
+* servertitle
+* songtitle
+* nexttitle
+* streamhits
+* streamstatus
+* bitrate
+* content
+* version
+
+You can pass any of the above keys to the get method to attempt to get that information.
+
+You can view these stats on your own server by visiting `host:port/stats?sid=1`
+
+Here is the official [SHOUTcast documentation](http://wiki.winamp.com/wiki/SHOUTcast_DNAS_Server_2_XML_Reponses#General_Server_Summary)
+
+### Played
+
+The played method will give you an array of objects, or tracks. Each track has two properties, 'playedat' and 'title'
+
+* playedat - when this track was played, please note this is in seconds
+* title - the track that was played
+
+You can view the played information by visiting `host:port/played?sid=1`

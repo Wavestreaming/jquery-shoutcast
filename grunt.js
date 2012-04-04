@@ -1,9 +1,12 @@
 config.init({
+  meta : {
+    banner : '/* Wavestreaming.com - https://github.com/Wavestreaming/jquery-shoutcast - MIT licensed */'
+  },
   lint: {
     files: ['jquery.shoutcast.js']
   },
   min: {
-    'jquery.shoutcast.min.js': ['jquery.shoutcast.js']
+    'jquery.shoutcast.min.js': ['<banner>','jquery.shoutcast.js']
   },
   watch: {
     files: ['jquery.shoutcast.js'],

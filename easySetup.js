@@ -30,6 +30,9 @@
    return; 
   }
   
+  opt.playedInterval = opt.playedInterval || 30000;
+  opt.statsInterval = opt.statsInterval || 5000;
+  
   //get all items which want shoutcast stats
   $('[data-shoutcast-value]').each(function(i,item){
     item = $(item);

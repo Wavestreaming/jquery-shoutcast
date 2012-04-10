@@ -141,7 +141,7 @@ Each call to $.SHOUTcast will return an internal SHOUTcast object, this object h
 
 ## SHOUTcast info
 
-### Stats <a name="#shoutcast-stats" href="#shoutcast-stats"></a>
+### Stats <a name="shoutcast-stats" href="#shoutcast-stats"></a>
 
 These are the various options which can be accessed when using the stats method.
 
@@ -167,7 +167,7 @@ You can view these stats on your own server by visiting `host:port/stats?sid=1`
 
 Here is the official [SHOUTcast documentation](http://wiki.winamp.com/wiki/SHOUTcast_DNAS_Server_2_XML_Reponses#General_Server_Summary)
 
-### Played <a name="#shoutcast-played" href="#shoutcast-played"></a>
+### Played <a name="shoutcast-played" href="#shoutcast-played"></a>
 
 The played method will give you an array of objects, or tracks. Each track has two properties, 'playedat' and 'title'
 

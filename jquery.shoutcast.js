@@ -8,8 +8,8 @@
     this.statsInterval = opt.statsInterval || opt.interval || 5000;
 
     this.host = opt.host;
-    this.port = opt.port||8000;
-    this.stream = opt.stream||1;
+    this.port = parseInt(opt.port,10)||8000;
+    this.stream = parseInt(opt.stream,10)||1;
 
     this._statsinterval = null;
     this._playedinterval = null;

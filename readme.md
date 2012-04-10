@@ -9,6 +9,8 @@ This simple plugin allows you to display various information about a SHOUTcast s
 
 ## Usage
 
+[View the easy setup guide](https://github.com/Wavestreaming/jquery-shoutcast/wiki/Easy-Setup) or keep reading for more flexible configuration.
+
 ### Embedding
 
 First you will need to reference jQUery (if you haven't already done so) and this plugin, place the following lines of code at the bottom of your HTML page, just before the `</body>` tag

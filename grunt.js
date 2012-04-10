@@ -3,13 +3,14 @@ config.init({
     banner : '/* Wavestreaming.com - https://github.com/Wavestreaming/jquery-shoutcast - MIT licensed */'
   },
   lint: {
-    files: ['jquery.shoutcast.js']
+    files: ['jquery.shoutcast.js','easySetup.js']
   },
   min: {
-    'jquery.shoutcast.min.js': ['<banner>','jquery.shoutcast.js']
+    'jquery.shoutcast.min.js': ['<banner>','jquery.shoutcast.js'],
+    'jquery.shoutcast.easy.min.js' : ['<banner>','jquery.shoutcast.js','easySetup.js']
   },
   watch: {
-    files: ['jquery.shoutcast.js'],
+    files: '<config:lint.files>',
     tasks: 'lint min'
   },
   jshint: {
@@ -26,7 +27,7 @@ config.init({
       latedef: true,
       noarg: true,
       noempty: true,
-      regexp: true,
+      regexp: false,
       jquery: true,
     }
   }

@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery-shoutcast by Wavestreaming</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jquery-shoutcast</h1>
+        <p>jQuery plugin to communicate with SHOUTcast DNAS v2 via JSON-P</p>
+        <p class="view"><a href="https://github.com/Wavestreaming/jquery-shoutcast">View the Project on GitHub <small>Wavestreaming/jquery-shoutcast</small></a></p>
+        <ul>
+          <li><a href="https://github.com/Wavestreaming/jquery-shoutcast/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Wavestreaming/jquery-shoutcast/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Wavestreaming/jquery-shoutcast">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>jQuery SHOUTcast plugin</h1>
+
+<p>This simple plugin allows you to display various information about a SHOUTcast server on your website.</p>
+
+<h2>Requirements</h2>
+
+<ol>
+<li>jQuery</li>
+<li>SHOUTcast V2 DNAS with JSON functionality</li>
+</ol><h2>Usage</h2>
+
+<h3>Embedding</h3>
+
+<p>First you will need to reference jQUery (if you haven't already done so) and this plugin, place the following lines of code at the bottom of your HTML page, just before the <code>&lt;/body&gt;</code> tag</p>
+
+<div class="highlight">
+<pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"your_website.com/assets/js/jquery.shoutcast.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre>
+</div>
+
+
+<p>Any of the following code that you see in this documentation must be either placed inside <code>&lt;script&gt;&lt;/script&gt;</code> tags or in an separate .js file.</p>
+
+<h3>Stream Stats</h3>
+
+<p>The plug can get the public stream stats taken from host:port/stats, here is the basic code:</p>
+
+<h4>Basic Setup</h4>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">.</span><span class="nx">SHOUTcast</span><span class="p">({</span>
+   <span class="nx">host</span> <span class="o">:</span> <span class="s1">'stardust.wavestreamer.com'</span><span class="p">,</span>
+   <span class="nx">port</span> <span class="o">:</span> <span class="mi">8062</span>
+<span class="p">}).</span><span class="nx">stats</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+   <span class="nx">$</span><span class="p">(</span><span class="s1">'#songtitle'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'songtitle'</span><span class="p">));</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<p>The above code will set the text of an element with the id of 'songtitle' to whatever the name of the current track is.</p>
+
+<h4>Auto update on an interval</h4>
+
+<p>You can set the plugin to automatically fetch new stats at an interval you specify, heres the basic code:</p>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">.</span><span class="nx">SHOUTcast</span><span class="p">({</span>
+   <span class="nx">host</span> <span class="o">:</span> <span class="s1">'stardust.wavestreamer.com'</span><span class="p">,</span>
+   <span class="nx">port</span> <span class="o">:</span> <span class="mi">8062</span><span class="p">,</span>
+   <span class="nx">interval</span> <span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
+   <span class="nx">stats</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'#songtitle'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'songtitle'</span><span class="p">));</span>
+   <span class="p">}</span>
+<span class="p">}).</span><span class="nx">startStats</span><span class="p">();</span>
+
+</pre>
+</div>
+
+
+<p>The above code will set the element with an id of 'songtitle' to the title of the currently playing track every 5 seconds.</p>
+
+<h4>Ensuring stream is active</h4>
+
+<p>Both of the above examples assume that the stream is live and set the song title, this is now always the case, to check of this you can do:</p>
+
+<div class="highlight">
+<pre><span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onAir</span><span class="p">()){</span>
+   <span class="nx">$</span><span class="p">(</span><span class="s1">'#songtitle'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'songtitle'</span><span class="p">));</span>
+<span class="p">}</span>
+</pre>
+</div>
+
+
+<p>The above code will only set the title if it is on air, or you could have a default song value:</p>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#songtitle'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'songtitle'</span><span class="p">,</span><span class="s1">'Off Air'</span><span class="p">));</span>
+</pre>
+</div>
+
+
+<p>The above code will show 'Off Air' if there is no song title.</p>
+
+<h3>Track history</h3>
+
+<p>The plugin can also get the track history from the shoutcast server, this is taken from host:port/played, here is the basic code:</p>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">.</span><span class="nx">SHOUTcast</span><span class="p">({</span>
+   <span class="nx">host</span> <span class="o">:</span> <span class="s1">'stardust.wavestreamer.com'</span><span class="p">,</span>
+   <span class="nx">port</span> <span class="o">:</span> <span class="mi">8062</span>
+<span class="p">}).</span><span class="nx">played</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tracks</span><span class="p">){</span>
+   <span class="nx">$</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+   <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">tracks</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">track</span><span class="p">){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">'&lt;li&gt;'</span><span class="o">+</span><span class="nx">track</span><span class="p">.</span><span class="nx">title</span><span class="o">+</span><span class="s1">'&lt;/li&gt;'</span><span class="p">);</span>
+   <span class="p">));</span>
+<span class="p">});</span>
+</pre>
+</div>
+
+
+<p>The above code is very basic but it will insert the track history into a ul element.</p>
+
+<h4>Updating played tracks at an interval</h4>
+
+<div class="highlight">
+<pre><span class="nx">$</span><span class="p">.</span><span class="nx">SHOUTcast</span><span class="p">({</span>
+   <span class="nx">host</span> <span class="o">:</span> <span class="s1">'stardust.wavestreamer.com'</span><span class="p">,</span>
+   <span class="nx">port</span> <span class="o">:</span> <span class="mi">8062</span><span class="p">,</span>
+   <span class="nx">playedInterval</span> <span class="o">:</span> <span class="mi">20000</span><span class="p">,</span>
+   <span class="nx">played</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tracks</span><span class="p">){</span>
+      <span class="nx">$</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">tracks</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">track</span><span class="p">){</span>
+         <span class="nx">$</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">'&lt;li&gt;'</span><span class="o">+</span><span class="nx">track</span><span class="p">.</span><span class="nx">title</span><span class="o">+</span><span class="s1">'&lt;/li&gt;'</span><span class="p">);</span>
+      <span class="p">));</span>
+   <span class="p">}</span>
+<span class="p">}).</span><span class="nx">startPlayed</span><span class="p">();</span>
+</pre>
+</div>
+
+
+<p>The above code will update the ul every 20 seconds with the played information</p>
+
+<h3>Configuration</h3>
+
+<h4>Initial options</h4>
+
+<p>As you have seen from the previous example you initial pass some options to the plugin, all supported options are:</p>
+
+<ul>
+<li>
+<code>host</code>       - the SHOUTcast host e.g. stardust.wavestreamer.com</li>
+<li>
+<code>port</code>    - [optional] the SHOUTcast port e.g. 8062 (8000 by default)</li>
+<li>
+<code>stream</code>  - [optional] the stream id e.g. 2 (1 by default)</li>
+<li>
+<code>interval</code>  - [optional] how often new stats should be fetched in milliseconds e.g. 5000 = 5 seconds</li>
+<li>
+<code>stats</code>   - [optional] the function to call when new stats are fetched, 'this' is the SHOUTcast object</li>
+<li>
+<code>played</code> - [optional] the functon to call when played info is fetched, 'this' is the SHOUTcast object</li>
+<li>
+<code>statsInverval</code> - [optional] how often should stats be fetched in milliseconds</li>
+<li>
+<code>playedInterval</code> - [optional] how often should played be fetched in milliseconds</li>
+</ul><p>The plugin will return a <code>SHOUTcast</code> object.</p>
+
+<p>Both <code>statsInterval</code> and <code>playedInterval</code> will default to interval if not provided.</p>
+
+<h3>SHOUTcast object</h3>
+
+<p>Each call to $.SHOUTcast will return an internal SHOUTcast object, this object has various functions which can be useful.</p>
+
+<ul>
+<li>
+<code>get([key,default])</code> - this method will get a value from the stats, e.g. 'songtitle', if no key then all the attributes will be returned. A sond default value can be passed to be returned if the key does not exist</li>
+<li>
+<code>stats([callback])</code> - this method will get stats from the SHOUTcast server, it will call the callback function with the stats, the callback function 'this' value will be the SHOUTcast object.</li>
+<li>
+<code>played([callback])</code> - this method will get the played tracks from the SHOUTcast server, it will call the callback with an array</li>
+<li>
+<code>startStats()</code> - start automatically fetching the stats at an interval, the interval/statsInterval properties and stats function should have been passed as initial options to the plugin</li>
+<li>
+<code>stopStats()</code> - stop automatically updating stats</li>
+<li>
+<code>startPlayed()</code> - start automatically fetching played information</li>
+<li>
+<code>stopPlayed()</code> - stop automatically fetching played information</li>
+<li>
+<code>getStatus()</code> - get the status of the stream, the return values are: 0 = offline, 1 = no source connected, 2 = on air</li>
+<li>
+<code>onAir()</code> - check if the stream is on air will return true or false</li>
+</ul><h2>SHOUTcast info</h2>
+
+<h3>Stats</h3>
+
+<p>These are the various options which can be accessed when using the stats method.</p>
+
+<ul>
+<li>currentlisteners</li>
+<li>peaklisteners</li>
+<li>maxlisteners</li>
+<li>uniquelisteners</li>
+<li>averagetime</li>
+<li>servergenre</li>
+<li>serverurl</li>
+<li>servertitle</li>
+<li>songtitle</li>
+<li>nexttitle</li>
+<li>streamhits</li>
+<li>streamstatus</li>
+<li>bitrate</li>
+<li>content</li>
+<li>version</li>
+</ul><p>You can pass any of the above keys to the get method to attempt to get that information.</p>
+
+<p>You can view these stats on your own server by visiting <code>host:port/stats?sid=1</code></p>
+
+<p>Here is the official <a href="http://wiki.winamp.com/wiki/SHOUTcast_DNAS_Server_2_XML_Reponses#General_Server_Summary">SHOUTcast documentation</a></p>
+
+<h3>Played</h3>
+
+<p>The played method will give you an array of objects, or tracks. Each track has two properties, 'playedat' and 'title'</p>
+
+<ul>
+<li>playedat - when this track was played, please note this is in seconds</li>
+<li>title - the track that was played</li>
+</ul><p>You can view the played information by visiting <code>host:port/played?sid=1</code></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Wavestreaming">Wavestreaming</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>

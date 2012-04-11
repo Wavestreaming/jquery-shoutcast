@@ -58,7 +58,7 @@
       that._status = 0;
       that._attr.status = that.getStatusAsText();
       fn.call(that,that._attr);
-      that.update(that._attr);
+      that.stats(that._attr);
     });
     return this;
   };

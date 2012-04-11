@@ -2,14 +2,13 @@
   Easy setup add on
 
 */
-(function(){
+(function(exports){
   "use strict";
   var opt = {},
       elems = {},
       stats = false,
       played = false,
-      ul,
-      SHOUTcast;
+      ul;
   
   //basically read the url of the script to check for options
   (function(){
@@ -32,7 +31,7 @@
   
   opt.playedInterval = opt.playedInterval || 30000;
   opt.statsInterval = opt.statsInterval || 5000;
-  
+
   //get all items which want shoutcast stats
   $('[data-shoutcast-value]').each(function(i,item){
     item = $(item);
@@ -58,9 +57,9 @@
       });
       ul.html(html);
   });
-  SHOUTcast = $.SHOUTcast(opt);
+  exports.SHOUTcast = $.SHOUTcast(opt);
   
-  stats && SHOUTcast.startStats();
-  played && SHOUTcast.startPlayed();
+  stats && exports.SHOUTcast.startStats();
+  played && exports.SHOUTcast.startPlayed();
   
-}());
+}(window));

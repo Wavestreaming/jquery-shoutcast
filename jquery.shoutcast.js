@@ -15,9 +15,6 @@
     this._playedinterval = null;
     this._stats = opt.stats || function(){};
     this._played = opt.played || function(){};
-
-    this._statsUrl = 'http://'+this.host+':'+this.port+'/stats?sid='+this.stream+'&json=1';
-    this._playedUrl = 'http://'+this.host+':'+this.port+'/played?sid='+this.stream+'&type=json';
   }
   
   /**
@@ -36,10 +33,10 @@
    * @return {SHOUTcast}      return this for chaining.
    */
   SHOUTcast.prototype.stats = function(fn){
-    var that = this,r;
+    var that = this,r,url = 'http://'+this.host+':'+this.port+'/stats?sid='+this.stream+'&json=1';
     fn = fn || function(){};
     r = $.ajax({
-      url : this._statsUrl,
+      url : url,
       dataType : 'jsonp',
       timeout : '2000'
     });
@@ -72,10 +69,10 @@
    * @return {SHOUTcast}      return this for chaining
    */
   SHOUTcast.prototype.played = function(fn){
-    var that = this;
+    var that = this, url='http://'+this.host+':'+this.port+'/played?sid='+this.stream+'&type=json';
     
     $.ajax({
-      url : this._playedUrl,
+      url : url,
       dataType : 'jsonp',
       timeout : 2000,
       success : function(data){

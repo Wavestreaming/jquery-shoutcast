@@ -52,13 +52,14 @@
         that._status = data.streamstatus === 1 ? 2 : 1;
 
         that._attr = data;
-
+        that._attr.status = that.getStatusAsText();
         //call the update method, give the raw data just incase its required
         fn.call(that,that._attr);
         that._stats(that._attr);
       });
     r.error(function(){
       that._status = 0;
+      that._attr.status = that.getStatusAsText();
       fn.call(that,that._attr);
       that.update(that._attr);
     });
@@ -135,6 +136,9 @@
     return this._status;
   };
 
+  SHOUTcast.prototype.getStatusAsText = function(){
+    return ['Offline','Awaiting Connection','On Air'][this._status];
+  };
   /**
    * Check if the SHOUTcast server is on air.
    * @return {bool} whether the server is on air or not (this means source connected)

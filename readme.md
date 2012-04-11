@@ -1,4 +1,4 @@
-#jQuery SHOUTcast plugin
+#jQuery SHOUTcast plugin <a name="documentation" href="#documentation"></a>
 
 This simple plugin allows you to display various information about a SHOUTcast server on your website.
 

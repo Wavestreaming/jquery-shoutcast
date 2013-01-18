@@ -29,7 +29,10 @@
    return; 
   }
   //if a value has been passed in the url then show that value wherever the script was inserted
-  opt.value && $script.after('<p data-shoutcast-value="'+opt.value+'"></p>');
+  opt.value && (function(){
+    //if value is played then add a ul otherwise add a p
+    opt.value === 'played' ? $script.after('<ul id="played"></ul>') : $script.after('<p data-shoutcast-value="'+opt.value+'"></p>');
+  }());
   
   opt.playedInterval = opt.playedInterval || 30000;
   opt.statsInterval = opt.statsInterval || 5000;

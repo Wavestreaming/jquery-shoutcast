@@ -8,11 +8,11 @@
       elems = {},
       stats = false,
       played = false,
-      ul;
+      $ul, $script= $('script').last();
   
   //basically read the url of the script to check for options
   (function(){
-    var uri = $('script').last().attr('src');
+    var uri = $script.attr('src');
     var options = uri.replace(/.*\?/,'');
     if(options === uri){
      return; 
@@ -28,6 +28,8 @@
   if(!opt.host){
    return; 
   }
+  //if a value has been passed in the url then show that value wherever the script was inserted
+  opt.value && $script.after('<p data-shoutcast-value="'+opt.value+'"></p>');
   
   opt.playedInterval = opt.playedInterval || 30000;
   opt.statsInterval = opt.statsInterval || 5000;
@@ -39,8 +41,8 @@
   });
   stats = !$.isEmptyObject(elems);
   
-  ul = $('#played');
-  played = !!ul.length;
+  $ul = $('#played');
+  played = !!$ul.length;
   
   //only update stats if there are items
   stats && (opt.stats = function(){
@@ -55,7 +57,7 @@
       $.each(tracks,function(i,track){
         html+='<li>'+track.title+'</li>';
       });
-      ul.html(html);
+      $ul.html(html);
   });
   exports.SHOUTcast = $.SHOUTcast(opt);
   

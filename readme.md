@@ -85,7 +85,7 @@ $.SHOUTcast({
    $('ul').html('');
    $.each(tracks,function(k,track){
       $('ul').append('<li>'+track.title+'</li>');
-   ));
+   });
 });
 ```
 The above code is very basic but it will insert the track history into a ul element.
@@ -101,7 +101,7 @@ $.SHOUTcast({
       $('ul').html('');
       $.each(tracks,function(k,track){
          $('ul').append('<li>'+track.title+'</li>');
-      ));
+      });
    }
 }).startPlayed();
 ```

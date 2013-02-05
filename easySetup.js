@@ -2,7 +2,7 @@
   Easy setup add on
 
 */
-(function(exports){
+(function(exports,$){
   "use strict";
   var opt = {},
       elems = {},
@@ -67,4 +67,4 @@
   stats && exports.SHOUTcast.startStats();
   played && exports.SHOUTcast.startPlayed();
   
-}(window));
+}(window,window.jQuery));

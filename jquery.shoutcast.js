@@ -1,4 +1,4 @@
-(function(){
+(function($){
   "use strict";
   function SHOUTcast(opt){
     this._attr = {};
@@ -152,4 +152,4 @@
   $.SHOUTcast = function(opt){
     return new SHOUTcast(opt);
   };
-}());
+}(window.jQuery));

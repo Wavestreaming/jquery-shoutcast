@@ -117,8 +117,8 @@ As you have seen from the previous example you initial pass some options to the 
 * `port`    - [optional] the SHOUTcast port e.g. 8062 (8000 by default)
 * `stream`  - [optional] the stream id e.g. 2 (1 by default)
 * `interval`  - [optional] how often new stats should be fetched in milliseconds e.g. 5000 = 5 seconds
-* `stats_path` - [optional] path on the host that returns the stats of the stream in JSON format e.g. xml2json.php (stats by default)
-* `played_path` - [optional] path on the host that returns the played tracks in JSON format e.g. xml2json.php (played by default)
+* `stats_path` - [optional] path on host that returns the stats e.g. stats_proxy.php (stats by default)
+* `played_path` - [optional] path on host that returns the played tracks e.g. played_proxy.php (played by default)
 * `stats`   - [optional] the function to call when new stats are fetched, 'this' is the SHOUTcast object
 * `played` - [optional] the functon to call when played info is fetched, 'this' is the SHOUTcast object
 * `statsInverval` - [optional] how often should stats be fetched in milliseconds

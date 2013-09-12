@@ -1,0 +1,9 @@
+{
+    "devDependencies": {
+        "grunt": "0.4",
+        "matchdep": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-watch": "*"
+    }
+}

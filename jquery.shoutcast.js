@@ -10,6 +10,8 @@
     this.host = opt.host;
     this.port = parseInt(opt.port,10)||8000;
     this.stream = parseInt(opt.stream,10)||1;
+    this.stats_path = opt.stats_path||'stats';
+    this.played_path = opt.played_path||'played';
 
     this._statsinterval = null;
     this._playedinterval = null;
@@ -33,7 +35,7 @@
    * @return {SHOUTcast}      return this for chaining.
    */
   SHOUTcast.prototype.stats = function(fn){
-    var that = this,r,url = 'http://'+this.host+':'+this.port+'/stats?sid='+this.stream+'&json=1';
+    var that = this,r,url = 'http://'+this.host+':'+this.port+'/'+this.stats_path+'?sid='+this.stream+'&json=1';
     fn = fn || function(){};
     r = $.ajax({
       url : url,
@@ -69,7 +71,7 @@
    * @return {SHOUTcast}      return this for chaining
    */
   SHOUTcast.prototype.played = function(fn){
-    var that = this, url='http://'+this.host+':'+this.port+'/played?sid='+this.stream+'&type=json';
+    var that = this, url='http://'+this.host+':'+this.port+'/'+this.played_path+'?sid='+this.stream+'&type=json';
     
     $.ajax({
       url : url,

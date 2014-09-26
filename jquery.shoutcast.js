@@ -60,7 +60,7 @@
       that._status = 0;
       that._attr.status = that.getStatusAsText();
       fn.call(that,that._attr);
-      that.stats(that._attr);
+      that._stats(that._attr);
     });
     return this;
   };

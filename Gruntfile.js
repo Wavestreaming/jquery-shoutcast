@@ -19,7 +19,7 @@ module.exports = function(grunt) {
                 noarg: true,
                 noempty: true,
                 regexp: false,
-                jquery: true,
+                jquery: true
             }
         },
         uglify: {

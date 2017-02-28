@@ -42,7 +42,7 @@
       dataType : 'jsonp',
       timeout : '2000'
     });
-    r.success(function(data){
+    r.done(function(data){
         if(typeof data !== 'object' || typeof data.streamstatus === 'undefined'){
           that._status = 0;
           return;
@@ -56,7 +56,7 @@
         fn.call(that,that._attr);
         that._stats(that._attr);
       });
-    r.error(function(){
+    r.fail(function(){
       that._status = 0;
       that._attr.status = that.getStatusAsText();
       fn.call(that,that._attr);
@@ -78,7 +78,7 @@
       dataType : 'jsonp',
       timeout : 2000,
       success : function(data){
-        if(!data instanceof Array){
+        if(!(data instanceof Array)){
          return; 
         }
         fn && fn.call(that,data);

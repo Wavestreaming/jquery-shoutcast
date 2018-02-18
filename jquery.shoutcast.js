@@ -7,8 +7,15 @@
     this.playedInterval = opt.playedInterval || opt.interval ||  30000;
     this.statsInterval = opt.statsInterval || opt.interval || 5000;
 
+    this.protocol = window.location.protocol;
     this.host = opt.host;
-    this.port = parseInt(opt.port,10)||8000;
+    if (this.protocol === 'http:') {
+      this.port = parseInt(opt.port,10)||8000;
+    } else if (this.protocol === 'https:') {
+      this.port = parseInt(opt.secure_port,10)||8000;
+    } else {
+      this.port = 8000;
+    }
     this.stream = parseInt(opt.stream,10)||1;
     this.stats_path = opt.stats_path||'stats';
     this.played_path = opt.played_path||'played';
@@ -35,7 +42,7 @@
    * @return {SHOUTcast}      return this for chaining.
    */
   SHOUTcast.prototype.stats = function(fn){
-    var that = this,r,url = 'http://'+this.host+':'+this.port+'/'+this.stats_path+'?sid='+this.stream+'&json=1';
+    var that = this,r,url = this.protocol+'//'+this.host+':'+this.port+'/'+this.stats_path+'?sid='+this.stream+'&json=1';
     fn = fn || function(){};
     r = $.ajax({
       url : url,
@@ -71,7 +78,7 @@
    * @return {SHOUTcast}      return this for chaining
    */
   SHOUTcast.prototype.played = function(fn){
-    var that = this, url='http://'+this.host+':'+this.port+'/'+this.played_path+'?sid='+this.stream+'&type=json';
+    var that = this, url=this.protocol+'//'+this.host+':'+this.port+'/'+this.played_path+'?sid='+this.stream+'&type=json';
     
     $.ajax({
       url : url,
